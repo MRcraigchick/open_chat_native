@@ -7,10 +7,13 @@ import Animated, {
 } from 'react-native-reanimated';
 
 export default function Button({
-  text = false,
+  label = false,
   classNames = {
+    container: '',
     button: '',
-    text: '',
+    animatedLayer: '',
+    childWrapper: '',
+    label: '',
   },
   onPressIn = () => {},
   onPressOut = () => {},
@@ -24,27 +27,39 @@ export default function Button({
     };
   });
 
+  const ChildComponent = ({ style }) => {
+    return (
+      <View
+        style={style}
+        className={`${classNames.childWrapper}`}>
+        {label ? (
+          <P className={`text-contrast text-[20px] ${classNames.label} `}>{label}</P>
+        ) : (
+          children
+        )}
+      </View>
+    );
+  };
+
   return (
-    <View className='bg-third rounded-[10px]'>
-      <Animated.View style={animatedStyle}>
-        <Pressable
-          {...props}
-          onPressIn={(e) => {
-            onPressIn(e);
-            animated.value = withTiming(0, { duration: 200 });
-          }}
-          onPressOut={(e) => {
-            onPressOut(e);
-            animated.value = withTiming(1, { duration: 500 });
-          }}
-          className={`bg-second w-full flex items-center justify-center rounded-[10px] h-[60px] ${classNames.button}`}>
-          {text ? (
-            <P className={`text-contrast text-[20px] ${classNames.text}`}>{text}</P>
-          ) : (
-            children
-          )}
-        </Pressable>
-      </Animated.View>
+    <View className={`bg-third rounded-[10px] ${classNames.container}`}>
+      <Pressable
+        className={`${classNames.button}`}
+        {...props}
+        onPressIn={(e) => {
+          onPressIn(e);
+          animated.value = withTiming(0, { duration: 100 });
+        }}
+        onPressOut={(e) => {
+          onPressOut(e);
+          animated.value = withTiming(1, { duration: 200 });
+        }}>
+        <Animated.View
+          className={`bg-second w-full flex items-center justify-center rounded-[10px] h-[60px] ${classNames.animatedLayer}`}
+          style={animatedStyle}
+        />
+        <ChildComponent className='flex justify-center items-center absolute left-0 right-0 top-0 bottom-0 rounded-[10px]' />
+      </Pressable>
     </View>
   );
 }
