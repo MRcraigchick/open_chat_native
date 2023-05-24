@@ -6,25 +6,21 @@ import { View } from 'react-native';
 
 export default function Landing() {
   return (
-    <FullPageLayout className='my-[50px]'>
-      <H1 className='text-first w-full text-center'>Open Chat</H1>
-      <View className='flex flex-1 mx-[10px]'>
-        <ChatIcon className='h-[400px]' />
-        <View className='mt-auto'>
-          <Button
-            label='Sign Up'
-            classNames={{
-              container: 'bg-third mb-[20px]',
-            }}
-          />
-          <Button
-            label='Login'
-            classNames={{
-              container: 'bg-third',
-            }}
-          />
-        </View>
-      </View>
+    <FullPageLayout className=''>
+      <H1 className='text-first w-full text-center mb-[50px]'>Open Chat</H1>
+      <ChatIcon className='h-[400px] mb-[30px]' />
+      <Button
+        label='Sign Up'
+        classNames={{
+          container: 'bg-third mb-[20px] md:max-w-[300px] ',
+        }}
+      />
+      <Button
+        label='Login'
+        classNames={{
+          container: 'bg-third md:max-w-[300px]',
+        }}
+      />
     </FullPageLayout>
   );
 }
