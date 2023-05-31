@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Landing } from './pages';
+import { Landing, Login } from './pages';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +13,10 @@ export default function NavigationStack() {
         <Stack.Screen
           name='landing'
           component={Landing}
+        />
+        <Stack.Screen
+          name='login'
+          component={Login}
         />
       </Stack.Navigator>
     </NavigationContainer>
